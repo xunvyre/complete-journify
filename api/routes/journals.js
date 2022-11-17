@@ -2,11 +2,11 @@ const router = require('express').Router();
 const Journal = require('../models/Journal');
 
 //get all journals
-router.get('/', async (req, res) =>
+router.get('/:userId', async (req, res) =>
 {
     try
     {
-        const journals = await Journal.find({userId: req.body.userId});
+        const journals = await Journal.find({userId: req.params.userId});
         res.status(200).json(journals);
     }
     catch (err)
@@ -16,7 +16,7 @@ router.get('/', async (req, res) =>
 });
 
 //get single journal
-router.get('/:id', async (req, res) =>
+router.get('/:userId/:id', async (req, res) =>
 {
     try
     {

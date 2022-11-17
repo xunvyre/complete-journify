@@ -1,26 +1,39 @@
-import React from 'react';
+import {React, useState, useEffect} from 'react';
 import BackButton from './BackButton';
 //import placeholder from '../../assets/images/placeholder-image.jpg';
-import { dJournals } from '../../assets/dummyData';
+//import { dJournals } from '../../assets/dummyData';
+import axios from 'axios';
 
 const Single = () =>
 {
-    console.log(window.location.pathname.split('/').pop());
-    const activeJournal = dJournals.find(journal => journal.id === 11);
+    //console.log(window.location.pathname.split('/').pop());
+    //const activeJournal = dJournals.find(journal => journal.id === 11);
+    const [journal, setJournal] = useState([]);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+    useEffect(() =>
+    {
+        
+        const fetchJournal = async () =>
+        {
+            const res = await axios.get("journals/637554423b4c178c255e0c6a");
+            setJournal(res.data);
+        };
+        fetchJournal();
+    }, []);
 
   return (
     <section id="single-journal row">
         <BackButton/>
-        <h2 class="journal-title">{activeJournal.title}</h2>
+        <h2 class="journal-title">{journal.title}</h2>
         <p class="journal-desc">
-            {activeJournal.entry}
+            {journal.entry}
         </p>
 
         <div class="flex">
 
             <div class="single-img card bg-light">
-                <img class="card-img-top img-preview" src={PF+activeJournal.img} alt=""/>
+                <img class="card-img-top img-preview" src={journal.img || PF+"/placeholder-image.jpg"} alt=""/>
             </div>
 
             <div class="dropdown">
@@ -57,7 +70,7 @@ const Single = () =>
                 <span>09/13/2022 by BoopSoop</span>
             </p>
         </div>
-        </section>
+    </section>
     )
 };
 

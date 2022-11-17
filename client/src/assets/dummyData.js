@@ -24,7 +24,7 @@ export const dJournals =
         userId: 1,
         title: "Stinkman1",
         entry: "This is a journal.",
-        img: "/placeholder-image.jpg",
+        img: "/journify_icon.jpg",
         date: "5 mins ago"
     },
     {

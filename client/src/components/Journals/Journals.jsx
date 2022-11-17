@@ -1,7 +1,8 @@
-import {React, useState} from 'react';
+import {React, useState, useEffect} from 'react';
 import newJ from '../../assets/images/journify-new-journal.png';
-import placeholder from '../../assets/images/placeholder-image.jpg';
-import {dJournals} from '../../assets/dummyData';
+//import placeholder from '../../assets/images/placeholder-image.jpg';
+//import {dJournals} from '../../assets/dummyData';
+import axios from 'axios';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -16,7 +17,18 @@ import { Navigation } from "swiper";
 
 const Journals = () =>
 {
-    //set useStates to activate single journal views
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+    const [journals, setJournals] = useState([]);
+    useEffect(() =>
+    {
+        const fetchJournals = async () =>
+        {
+            const res = await axios.get("journals/637554133b4c178c255e0c65");
+            setJournals(res.data);
+        };
+        fetchJournals();
+    }, []);
+
     return (
         <section id="journals">
             <Swiper
@@ -36,12 +48,12 @@ const Journals = () =>
                     </a>
                 </SwiperSlide>
 
-                {dJournals.filter(journal => journal.userId === 1).map((journal, i) =>
+                {journals.map((journal, i) =>
                 (
                     <SwiperSlide key={i.id}>
-                        <a href={`journals/${journal.id}`}>
+                        <a href={`journals/${journal._id}`}>
                             <div class="journal card bg-light width18">
-                                <img class="card-img-top img-preview" src={placeholder} alt=""/>
+                                <img class="card-img-top img-preview" src={journal.img || PF + "/placeholder-image.jpg"} alt=""/>
                                 <div class="card-body">
                                     <h2 class="card-title">{journal.title}</h2>
                                 </div>
