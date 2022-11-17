@@ -24,7 +24,7 @@ export const dJournals =
         userId: 1,
         title: "Stinkman1",
         entry: "This is a journal.",
-        img: "./images/journify_icon.jpg",
+        img: "/placeholder-image.jpg",
         date: "5 mins ago"
     },
     {
@@ -32,7 +32,7 @@ export const dJournals =
         userId: 1,
         title: "Stinkman2",
         entry: "This is a journal.",
-        img: "assets/images/placeholder-image.jpg",
+        img: "/placeholder-image.jpg",
         date: "5 mins ago"
     },
     {
@@ -40,7 +40,7 @@ export const dJournals =
         userId: 1,
         title: "Stinkman3",
         entry: "This is a journal.",
-        img: "assets/images/placeholder-image.jpg",
+        img: "/placeholder-image.jpg",
         date: "5 mins ago"
     },
     {
@@ -48,7 +48,7 @@ export const dJournals =
         userId: 2,
         title: "Soop1",
         entry: "This is a journal.",
-        img: "assets/images/placeholder-image.jpg",
+        img: "/placeholder-image.jpg",
         date: "5 mins ago"
     },
     {
@@ -56,7 +56,7 @@ export const dJournals =
         userId: 2,
         title: "Soop2",
         entry: "This is a journal.",
-        img: "assets/images/placeholder-image.jpg",
+        img: "/placeholder-image.jpg",
         date: "5 mins ago"
     },
     {
@@ -64,7 +64,7 @@ export const dJournals =
         userId: 3,
         title: "Grumpling's Journal",
         entry: "This is a journal.",
-        img: "assets/images/placeholder-image.jpg",
+        img: "/placeholder-image.jpg",
         date: "5 mins ago"
     },
 ]

@@ -5,7 +5,9 @@ import { dJournals } from '../../assets/dummyData';
 
 const Single = () =>
 {
-    const activeJournal = dJournals.find(journal => journal.id === 12);
+    console.log(window.location.pathname.split('/').pop());
+    const activeJournal = dJournals.find(journal => journal.id === 11);
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (
     <section id="single-journal row">
@@ -18,7 +20,7 @@ const Single = () =>
         <div class="flex">
 
             <div class="single-img card bg-light">
-                <img class="card-img-top img-preview" src={activeJournal.img} alt=""/>
+                <img class="card-img-top img-preview" src={PF+activeJournal.img} alt=""/>
             </div>
 
             <div class="dropdown">
