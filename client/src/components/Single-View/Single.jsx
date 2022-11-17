@@ -16,7 +16,8 @@ const Single = () =>
         
         const fetchJournal = async () =>
         {
-            const res = await axios.get("journals/637554423b4c178c255e0c6a");
+            const activeJournal = await (window.location.pathname.split('/').pop());
+            const res = await axios.get(`journals/${activeJournal}`);
             setJournal(res.data);
         };
         fetchJournal();
