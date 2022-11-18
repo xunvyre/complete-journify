@@ -2,9 +2,16 @@ import React from 'react';
 
 const Donate = () =>
 {
+
   return (
     <section id="donate">
       <p>Love our site? Support the team:</p>
+      <div class='input-group input-group-sm mb-3'>
+        <a href='https://donate.stripe.com/test_dR69Bz673ebb5jOeUU%27%3E'>
+          <button type="button" class= "btn btn-info btn-sm donate-btn">Click Here To Donate</button>
+        </a>
+      </div>
+      <br />
       <div class="card donate">
         <div class="input-group input-group-sm mb-3">
           <div class="input-group-prepend">
@@ -27,6 +34,7 @@ const Donate = () =>
         <button type="button" class="btn btn-info btn-sm donate-btn">Thank you!</button>
       </div> 
     </section>
+
   )
 };
 

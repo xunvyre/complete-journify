@@ -1,8 +1,9 @@
-import {React, useState, useEffect} from 'react';
+import {React, useState, useEffect, useContext} from 'react';
 import newJ from '../../assets/images/journify-new-journal.png';
 //import placeholder from '../../assets/images/placeholder-image.jpg';
 //import {dJournals} from '../../assets/dummyData';
 import axios from 'axios';
+import { AuthContext } from '../../context/AuthContext';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -17,14 +18,19 @@ import { Navigation } from "swiper";
 
 const Journals = () =>
 {
+    const {user} = useContext(AuthContext);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const [journals, setJournals] = useState([]);
     useEffect(() =>
     {
         const fetchJournals = async () =>
         {
-            const res = await axios.get("journals/637554133b4c178c255e0c65");
-            setJournals(res.data);
+            const res = await axios.get(`journals/${user._id}`);
+            setJournals(res.data.sort((p1, p2) =>
+            {
+                return new Date(p2.createdAt) - new Date(p1.createdAt);
+            }
+            ));
         };
         fetchJournals();
     }, []);

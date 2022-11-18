@@ -1,13 +1,15 @@
-import {React, useState, useEffect} from 'react';
+import {React, useState, useEffect, useContext} from 'react';
 import BackButton from './BackButton';
 //import placeholder from '../../assets/images/placeholder-image.jpg';
 //import { dJournals } from '../../assets/dummyData';
 import axios from 'axios';
+import { AuthContext } from '../../context/AuthContext';
 
 const Single = () =>
 {
     //console.log(window.location.pathname.split('/').pop());
     //const activeJournal = dJournals.find(journal => journal.id === 11);
+    const {user} = useContext(AuthContext);
     const [journal, setJournal] = useState([]);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 

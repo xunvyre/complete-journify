@@ -1,4 +1,7 @@
-import {React, useRef} from 'react';
+import {React, useRef, useContext} from 'react';
+import { loginCall } from '../../apiCalls';
+import {AuthContext} from '../../context/AuthContext'
+import axios from 'axios';
 
 const Login = () =>
 {
@@ -8,11 +11,40 @@ const Login = () =>
     const username =  useRef();
     const signPW =  useRef();
     const signPWcheck =  useRef();
-    const handleClick = (e) =>
+    const {user, isFetching, error, dispatch} = useContext(AuthContext);
+    const handleClickLog = (e) =>
     {
         e.preventDefault();
-        console.log(logEmail.current.value, logPW.current.value);
+        loginCall({email: logEmail.current.value, password: logPW.current.value}, dispatch);
     };
+    const handleClickSign = async (e) =>
+    {
+        e.preventDefault();
+        if(signPWcheck.current.value !== signPW.current.value)
+        {
+            signPW.current.setCustomValidity("Passwords don't match!");
+        }
+        else
+        {
+            const user =
+            {
+                username: username.current.value,
+                email: signEmail.current.value,
+                password: signPW.current.value
+            };
+            try
+            {
+                await axios.post('/auth/register', user);
+                loginCall({email: signEmail.current.value, password: signPW.current.value}, dispatch);
+            }
+            catch(err)
+            {
+                console.log(err);
+            }
+        }
+    };
+
+    console.log(user);
   return (
     <div class="log-in">
         <div>
@@ -24,7 +56,7 @@ const Login = () =>
             </p>
         </div>
         <div>
-            <form class="card journal form-group" id="login-form" onSubmit={handleClick}>
+            <form class="card journal form-group" id="login-form" onSubmit={handleClickLog}>
                 <h2>Log in:</h2>
                 <label for="email">Email:</label>
                 <input type="email" class="form-control form-control-lg" id="login-email" ref={logEmail} required placeholder="you@example.com"/>
@@ -32,7 +64,7 @@ const Login = () =>
                 <input type="password" class="form-control form-control-lg" id="login-password" ref={logPW} required placeholder="Enter Password"/>
                 <button type="submit" class="btn btn-info login-btn col">Log in!</button>
             </form>
-            <form class="card journal form-group" id="signup-form" onSubmit={handleClick}>
+            <form class="card journal form-group" id="signup-form" onSubmit={handleClickSign}>
                 <h2>Sign up:</h2>
                 <label for="name">Name:</label>
                 <input type="name" class="form-control form-control-sm" id="signup-name" ref={username} required placeholder="John Doe"/>
